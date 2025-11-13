@@ -1,0 +1,416 @@
+@font-face {
+    font-family: "AxcylFont";
+    src: url("fonts/APOLLO.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    font-family: "AxcylFont", sans-serif;
+    margin: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(1, 19, 19, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+}
+
+.logo {
+    display: inline-block;
+    width: 200px;
+    height: 55px;
+    background-image: url("../images/YAN\ XANDER\ logo\ white.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.search-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/search\ icon\ white.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+    overflow: hidden;
+    transition: opacity .2s ease;
+}
+
+.cart {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/cart\ white.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.search-container {
+    width: 200px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Navigation bar elements */
+
+.menu-icon-placeholder {
+    flex: 0 0 40px;
+    width: 40px; /* same as icon width */
+    height: 40px;
+    display: inline-block;
+}
+
+.menu-icon-overlay {
+    position: fixed;
+    top: 15px;     /* adjust to match navbar spacing */
+    left: 20px;    /* adjust to where you want it */
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    z-index: 99999;  /* higher than sidebar + navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.icons span {
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 20px;
+}
+
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -200px;
+    height: 100%;
+    width: 200px;
+    background: rgb(31, 31, 31);
+    backdrop-filter: blur(8px);
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 3000;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    color: white;
+    font-size: 12px;
+}
+
+.sidebar li {
+    height: 60px;
+    cursor: pointer;
+}
+
+.sidebar li:hover {
+    background: rgba(255,255,255, 0.2);
+}
+
+.sidebar.show {
+    left: 0;
+}
+
+.sidebar li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 180px;
+    height: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-left: 20px;
+}
+
+/* Search Bar */
+
+.search-bar {
+    width: 0;
+    opacity: 0;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    color: white;
+    transition: width 0.3s ease, opacity .5s ease;
+    font-size: 16px;
+    outline: none;
+}
+
+/* SB when hovered*/
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 260px;
+    padding-right: 50px;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.search-container {
+    justify-content: space-between;
+    display: inline-flex;
+    align-items: center;
+    width: 60px;
+    overflow: hidden;
+    transition: width 0.25s ease;
+}
+
+.search-container:hover {
+    width: 200px;
+}
+
+.search-container:hover .search-bar {
+    width: 100%;
+    opacity: 1;
+}
+
+.search-container:hover .search-icon {
+    opacity: 0;
+}
+
+/* FOOTER */
+
+.footer {
+  width: 100%;
+  padding: 40px;
+  background: rgba(1, 19, 19, 0.75);
+  backdrop-filter: blur(8px);
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 150px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer .links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer .links li {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Privacy */
+
+.privacy {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding-top: 60px;
+}
+
+.privacy ul,
+.privacy ol {
+    display: inline-block;
+    text-align: left;
+    padding-left: 0;
+    margin: 0 auto 1em auto;
+}
+
+.privacy h1,
+.privacy h2,
+.privacy p {
+    text-align: center;
+}
+
+/* Refund */
+
+.refund {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding-top: 60px;
+}
+
+.refund ul,
+.refund ol {
+    display: inline-block;
+    text-align: left;
+    padding-left: 0;
+    margin: 0 auto 1em auto;
+}
+
+.refund h1,
+.refund h2,
+.refund p {
+    text-align: center;
+}
+
+/* SHIPPING */
+
+.shipping {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding-top: 60px;
+}
+
+.shipping ul,
+.shipping ol {
+    display: inline-block;
+    text-align: left;
+    padding-left: 0;
+    margin: 0 auto 1em auto;
+}
+
+.shipping h1,
+.shipping h2,
+.shipping p {
+    text-align: center;
+}
+
+/* TOS */
+
+.tos {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding-top: 60px;
+}
+
+.tos ul,
+.tos ol {
+    display: inline-block;
+    text-align: left;
+    padding-left: 0;
+    margin: 0 auto 1em auto;
+}
+
+.tos h1,
+.tos h2,
+.tos p {
+    text-align: center;
+}
+
+/* CONTACT */
+
+.contact {
+    text-transform: uppercase;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 60px;
+    font-size: 15px;
+}
+
+.contact form {
+    display: inline-block;
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* Index */
+
+.shop {
+    padding-top: 400px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: black;
+}
+
+.shop a:visited {
+    color: black;
+}
+
+.background {
+    background-image: url("../images/YAN\ XANDER\ logo.png");
+    background-position: 50% 180%;
+}
+
+/* STORE */
+
+.product-page {
+    margin-top: 60px;
+    text-transform: uppercase;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 per row */
+    width: 100%;
+    cursor: pointer;
+}
+
+.product img {
+    width: 100%; /* fill the grid cell */
+    display: block; /* remove bottom spacing */
+}
+
+.product-info {
+    text-align: center; /* center name & price */
+    margin-top: 8px; /* small space below image */
+}
+
+.filters ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.filters li {
+    gap: 10px;
+}
