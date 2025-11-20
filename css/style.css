@@ -32,6 +32,15 @@ main {
     background: rgba(1, 19, 19, 0.75);
     backdrop-filter: blur(8px);
     z-index: 2000;
+    margin-left: -20px;
+}
+
+.nav-inner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -92,7 +101,7 @@ main {
 
 .menu-icon-overlay {
     position: fixed;
-    top: 15px;     /* adjust to match navbar spacing */
+    top: 10px;     /* adjust to match navbar spacing */
     left: 20px;    /* adjust to where you want it */
     font-size: 24px;
     cursor: pointer;
@@ -116,9 +125,9 @@ main {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -200px;
+    left: -300px;
     height: 100%;
-    width: 200px;
+    width: 300px;
     background: rgb(31, 31, 31);
     backdrop-filter: blur(8px);
     transition: left 0.3s ease;
@@ -168,7 +177,7 @@ main {
     background: transparent;
     color: white;
     transition: width 0.3s ease, opacity .5s ease;
-    font-size: 16px;
+    font-size: 14px;
     outline: none;
 }
 
@@ -179,7 +188,7 @@ main {
     align-items: center;
     gap: 10px;
     width: 260px;
-    padding-right: 50px;
+    padding-right: 40px;
     justify-content: flex-end;
     margin-left: auto;
 }
@@ -210,13 +219,13 @@ main {
 
 .footer {
   width: 100%;
-  padding: 40px;
+  padding: 40px 0px;
   background: rgba(1, 19, 19, 0.75);
   backdrop-filter: blur(8px);
   color: white;
   text-align: center;
   font-size: 12px;
-  margin-top: 150px;
+  margin-top: 60px;
 }
 
 .footer a {
@@ -377,7 +386,7 @@ main {
 
 .background {
     background-image: url("../images/YAN\ XANDER\ logo.png");
-    background-position: 50% 180%;
+    background-position: 50% 60%;
 }
 
 /* STORE */
@@ -391,26 +400,228 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 per row */
     width: 100%;
-    cursor: pointer;
 }
 
 .product img {
-    width: 100%; /* fill the grid cell */
-    display: block; /* remove bottom spacing */
+    width: 100%;
+    display: block;
 }
 
-.product-info {
-    text-align: center; /* center name & price */
-    margin-top: 8px; /* small space below image */
+.products-container a {
+    text-decoration: none;
+    color:#000000;
+}
+
+.product-info-home {
+    text-align: left;
+    margin-top: 8px;
+    font-size: 12px;
 }
 
 .filters ul {
     display: flex;
     list-style: none;
-    gap: 15px;
-    cursor: pointer;
+    gap: 30px;
+    margin: 40px 0px;
+    font-size: 14px;
 }
 
 .filters li {
+    cursor: pointer;
+}
+
+.route ul {
+    display: flex;
+    list-style: none;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.route li a {
+    text-decoration: none;
+    color:#000000;
+    font-size: 12px;
+}
+
+/*Product page*/
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 12px;
+}
+
+.breadcrumb .separator {
+    margin: 0 16px;
+}
+
+.breadcrumbs {
+    position: absolute;
+    top: 80px;
+    left: 45px;
+    z-index: 50;
+    font-size: 12px;
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #000000;
+    user-select: none;
+}
+
+.breadcrumbs .seperator {
+    margin: 0 20px;
+    user-select: none;
+}
+
+/* Product Section */
+.product-purchase {
+    margin-top: 60px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.product-purchase-img {
+    width: 50%;
+}
+
+.product-purchase-img img {
+    display: block;
+    width: 100%;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.product-info {
+    width: 40%;
+    position: relative;
+    text-align: left;
+    margin: 75px;
+}
+
+.product-info-inner {
+    position: sticky;
+    top: 155px;
+    margin-top: 10px;
+}
+
+.product-info ul {
+    list-style: none;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.prod-name {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.prod-price {
+    font-size: 14px;
+    margin-bottom: 70px;
+}
+
+.no-products {
+    display: none; /* hidden by default */
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+/* Buttons */
+button {
+    border: 1px solid #000;
+    cursor: pointer;
+    padding: 15px 50px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.color button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid transparent;
+}
+
+.color button.selected {
+    border: 1px solid #000;
+}
+
+.size button {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.size button.selected {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+/* Add to Cart Button */
+.add-to-cart {
+    background-color: #000000;
+    color: #fff;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.add-to-cart:hover {
+    background-color: #062a38;
+}
+
+/* Layout for color and size selectors */
+.color-buttons, .size-buttons {
+    display: flex;
+    align-items: center;
     gap: 10px;
+    margin-bottom: 15px;
+}
+
+.color span, .size span {
+    display: block;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Product Description */
+.description li {
+    margin-bottom: 5px;
+    text-transform: none;
+    font-size: 14px;
+}
+
+.dropdown {
+    width: 100%;
+
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-align: left;
+    cursor: pointer;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+}
+
+.dropdown-content {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1;
+    display: none;
 }
