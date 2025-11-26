@@ -28,7 +28,7 @@ async function initializeCheckout() {
   
   // Function to fetch client secret from server
   async function fetchClientSecret() {
-    const response = await fetch('http://localhost:4242/create-checkout-session', {
+    const response = await fetch('https://web-production-6c5dc.up.railway.app/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ async function initializeCheckout() {
 }
 
 async function showOrderStatus(sessionId) {
-  const response = await fetch(`http://localhost:4242/session-status?session_id=${sessionId}`);
+  const response = await fetch(`https://web-production-6c5dc.up.railway.app/session-status?session_id=${sessionId}`);
   const session = await response.json();
 
   const checkoutDiv = document.getElementById('checkout');
