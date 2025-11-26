@@ -9,11 +9,11 @@ set :port, ENV.fetch('PORT', 4242)
 set :bind, '0.0.0.0'
 set :protection, false
 
-YOUR_DOMAIN = 'http://localhost:5500'
+YOUR_DOMAIN = ENV['PUBLIC_URL'] || 'http://localhost:5500'
 
 # Add CORS back
 before do
-  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Origin'] = ENV['PUBLIC_URL']
   response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
   response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, Accept'
 end
