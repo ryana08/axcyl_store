@@ -9,6 +9,7 @@ Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
 configure do
   set :static, true
+  set :public_folder, File.dirname(__FILE__)
   set :port, ENV.fetch('PORT', 4242)
   set :bind, '0.0.0.0'
   set :protection, false
