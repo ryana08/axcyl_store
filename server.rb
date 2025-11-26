@@ -7,7 +7,7 @@ Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 set :static, true
 set :port, ENV.fetch('PORT', 4242)
 set :bind, '0.0.0.0'
-set :protection, except: [:host_authorization]  # Disable host authorization check
+set :protection, false
 
 YOUR_DOMAIN = 'http://localhost:5500'
 
