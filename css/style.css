@@ -29,7 +29,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background: rgba(1, 19, 19, 0.75);
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(8px);
     z-index: 2000;
     margin-left: -20px;
@@ -45,7 +45,7 @@ main {
 
 .logo {
     display: inline-block;
-    width: 200px;
+    width: 150px;
     height: 55px;
     background-image: url("../images/YAN\ XANDER\ logo\ white.png");
     background-size: contain;
@@ -58,7 +58,7 @@ main {
 }
 
 .search-icon {
-    display: inline-block;
+    display: flex;
     width: 40px;
     height: 40px;
     background-image: url("../images/search\ icon\ white.png");
@@ -68,6 +68,8 @@ main {
     text-indent: -9999px;
     overflow: hidden;
     transition: opacity .2s ease;
+    align-items: center;
+    justify-content: center;
 }
 
 .cart {
@@ -125,45 +127,163 @@ main {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -300px;
+    right: -320px;
     height: 100%;
     width: 300px;
-    background: rgb(31, 31, 31);
+    background: rgb(248, 248, 248);
     backdrop-filter: blur(8px);
-    transition: left 0.3s ease;
-    padding-top: 60px;
+    transition: right 0.3s ease;
+    padding: 10px 10px;
     z-index: 3000;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    color: white;
+.sidebar.show {
+    right: 0;
+    padding: 10px 10px;
+}
+
+.sidebar.show .exit {
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-left: 250px;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sb-items {
+    border: thin solid black;
+    overflow-y: scroll;
+}
+
+.sub-description {
+    color:rgb(112, 112, 112);
     font-size: 12px;
 }
 
-.sidebar li {
-    height: 60px;
-    cursor: pointer;
-}
-
-.sidebar li:hover {
-    background: rgba(255,255,255, 0.2);
-}
-
-.sidebar.show {
-    left: 0;
-}
-
-.sidebar li a {
+.sb-checkout button{
+    width: 100%;
+    border: none;
+    background-color: #69a9ad;
     color: white;
-    text-decoration: none;
-    display: block;
-    width: 180px;
+}
+
+.sb-info {
+    position: absolute;
+    bottom: 30px;
+    margin-right: 10px;
+    font-size: 14px;
+    border-top: thin solid black;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    margin-left: 20px;
+    background: rgba(255, 255, 255, 0.3); /* White with 30% opacity */
+    backdrop-filter: blur(4px); /* Blur effect */
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Don't block clicks when hidden */
+    transition: opacity 0.3s ease;
+    z-index: 2999; /* Just below sidebar (which is 3000) */
+}
+
+.sidebar-overlay.show {
+    opacity: 1; /* Visible when shown */
+    pointer-events: auto; /* Enable clicks to close sidebar */
+}
+
+/* Search Bar Items */
+
+.sb-items {
+    text-transform: uppercase;
+    padding: 10px;
+    border: none;
+    overflow-y: scroll;
+    height: 75%;
+}
+
+.cart-item-info p {
+    margin: 5px 0;
+}
+
+.cart-item {
+    font-size: 12px;
+    display: flex;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.cart-item-info {
+    margin: 5px;
+    width: 127px;
+}
+
+.cart-item-info p {
+    font-size: 11px;
+}
+
+.cart-item-header {
+    display: flex;
+}
+
+.remove-item {
+    padding: 2px 2px;
+    position: absolute; 
+    right: 1px;
+    top: 1px;
+    border: none;
+    background-color: rgb(248, 248, 248);
+    color: #8a8a8a;
+}
+
+.sb-items img {
+    width: 140px;
+    height: auto;
+    object-fit: cover;
+}
+
+.decrease-qty, .increase-qty{
+    padding: 3px 7px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    border: none;
+}
+
+.increase-qty {
+    margin-left: 40px;
+    
+}
+
+.increase-qty.double-digit {
+    margin-left: 50px;
+}
+
+.quantity {
+    padding: 5px 5px;
+    margin-left: 23px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+
+.sb-info {
+    position: absolute;
+    bottom: 25px;
+    height: 17%;
+    background-color: rgb(248, 248, 248);
+}
+
+.cart-item-header {
+    margin-bottom: 10px;
+}
+
+.sb-checkout button {
+    position: absolute;
+    bottom: 1%;
 }
 
 /* Search Bar */
@@ -171,7 +291,7 @@ main {
 .search-bar {
     width: 0;
     opacity: 0;
-    padding: 5px;
+    padding: 0;
     border: none;
     border-bottom: 1px solid white;
     background: transparent;
@@ -181,25 +301,31 @@ main {
     outline: none;
 }
 
-/* SB when hovered*/
-
-.icons {
+.icons-right {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 260px;
-    padding-right: 40px;
     justify-content: flex-end;
-    margin-left: auto;
+    margin-right: 20px;
+}
+
+.icons-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 260px;
+    justify-content: flex-start;
+    margin-left: 20px;
 }
 
 .search-container {
-    justify-content: space-between;
-    display: inline-flex;
+    justify-content: flex-start;
+    display: flex;
     align-items: center;
-    width: 60px;
     overflow: hidden;
     transition: width 0.25s ease;
+    width: 40px;
 }
 
 .search-container:hover {
@@ -213,6 +339,18 @@ main {
 
 .search-container:hover .search-icon {
     opacity: 0;
+    width: 20px;
+    transition: width 0.5s ease, opacity .2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .search-container:hover {
+        width: 120px;
+    }
+    
+    .logo {
+        width: 110px;
+    }
 }
 
 /* FOOTER */
@@ -220,12 +358,10 @@ main {
 .footer {
   width: 100%;
   padding: 40px 0px;
-  background: rgba(1, 19, 19, 0.75);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(8px);
   color: white;
   text-align: center;
-  font-size: 12px;
-  margin-top: 60px;
 }
 
 .footer a {
@@ -240,11 +376,82 @@ main {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: nowrap;
 }
 
 .footer .links li {
   cursor: pointer;
   font-size: 12px;
+  flex-shrink: 0;
+}
+
+.links {
+    width: 70%;
+    position: center;
+    margin: 0 auto;
+}
+
+.footer p {
+    margin-top: 20px;
+    font-size: 10px;
+}
+
+
+@media (max-width: 480px) {
+    .links {
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        width: 70%;
+        padding-left: 50px;
+    }
+
+    .footer .links ul {
+        justify-content: left;
+    }
+
+    .links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .links {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 50px, black calc(100% - 50px), transparent);
+        mask-image: linear-gradient(to right, transparent, black 50px, black calc(100% - 50px), transparent);
+    }
+}
+
+@media (min-width: 481px) {
+
+    .links {
+        overflow-x: auto;
+        padding-bottom: 10px;
+        }
+        
+    .links::-webkit-scrollbar {
+        height: 8px; /* Make it visible with a height */
+    }
+    
+    .links::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.3); /* Light scrollbar */
+        border-radius: 4px;
+    }
+    
+    .links::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .footer .links ul {
+    justify-content: flex-start; /* Instead of center */
+    }
+}
+
+@media (min-width: 1101px) {
+    .footer .links ul {
+        justify-content: center; /* Only center when there's enough space */
+    }
+    
+    .links {
+        overflow-x: visible; /* No scroll needed */
+    }
 }
 
 /* Privacy */
@@ -357,15 +564,11 @@ main {
     text-transform: uppercase;
     text-align: center;
     max-width: 500px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
     padding-top: 60px;
     font-size: 15px;
-}
-
-.contact form {
-    display: inline-block;
-    text-align: left;
-    margin-top: 20px;
 }
 
 /* Index */
@@ -377,16 +580,25 @@ main {
     margin-right: auto;
     font-size: 20px;
     text-transform: uppercase;
-    color: black;
+    color: white;
+}
+
+.shop a {
+    padding: 10px;
+    border: thin solid white;
+    text-decoration: none;
 }
 
 .shop a:visited {
-    color: black;
+    color: white;
 }
 
 .background {
-    background-image: url("../images/YAN\ XANDER\ logo.png");
-    background-position: 50% 60%;
+    background-image: url("../images/brick\ wall\ ex.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 /* STORE */
@@ -400,6 +612,13 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 per row */
     width: 100%;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .products-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .product img {
@@ -415,6 +634,7 @@ main {
 .product-info-home {
     text-align: left;
     margin-top: 8px;
+    margin-left: 12px;
     font-size: 12px;
 }
 
@@ -423,11 +643,41 @@ main {
     list-style: none;
     gap: 30px;
     margin: 40px 0px;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 .filters li {
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+.filters ul {
+    overflow-x: scroll;
+    padding-right: 40px;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+.filters {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 50px, black calc(100% - 50px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 50px, black calc(100% - 50px), transparent);
+}
+
+.filters li {
+    flex-shrink: 0;
+}
+
+.filters ul::-webkit-scrollbar {
+    height: 6px;
+}
+
+.filters ul::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3); /* Light scrollbar */
+    border-radius: 4px;
+}
+
 }
 
 .route ul {
@@ -444,6 +694,11 @@ main {
 }
 
 /*Product page*/
+
+.breadcrumb {
+    padding-left: 16px;
+    display: inline-block;
+}
 
 .breadcrumb a {
     text-decoration: none;
@@ -479,7 +734,6 @@ main {
     margin-top: 60px;
     display: flex;
     gap: 40px;
-    flex-wrap: wrap;
 }
 
 .product-purchase-img {
@@ -537,7 +791,7 @@ main {
 button {
     border: 1px solid #000;
     cursor: pointer;
-    padding: 15px 50px;
+    padding: 15px 30px;
     font-size: 12px;
     transition: all 0.3s ease;
 }
@@ -575,12 +829,12 @@ button {
 }
 
 .add-to-cart:hover {
-    background-color: #062a38;
+    background-color: #69a9ad;
+    border: thin solid #69a9ad;
 }
 
 /* Layout for color and size selectors */
 .color-buttons, .size-buttons {
-    display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 15px;
@@ -624,4 +878,27 @@ button {
     font-size: 13px;
     line-height: 1;
     display: none;
+}
+
+@media(max-width:831px) {
+
+.product-purchase {
+    flex-direction: column;
+    margin-right: 40px;
+}
+
+.product-purchase-img {
+    width: 100%;
+}
+
+.product-info {
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 3cqw;
+}
+
+.add-to-cart {
+    width: 95%;
+}
 }

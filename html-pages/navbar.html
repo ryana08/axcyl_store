@@ -1,25 +1,36 @@
-<header class = "navbar">
-    <div class = "nav-inner">
-    <div class = "menu-icon-placeholder"></div>
-    <div class = "logo"></div>
+<header class="navbar">
+    <div class="nav-inner">
+        <a href="../index.html" class="logo"></a>
 
-    <div class = "icons">
-        <div class="search-container">
-            <span class = "search-icon">search</span>
-            <input type = "text" class = "search-bar" placeholder = "SEARCH...">
+        <div class="icons-left">
+            <div class="search-container">
+                <span class="search-icon">search</span>
+                <input type="text" id="searchBar" class="search-bar" placeholder="SEARCH..." autocomplete="off">
+            </div>
         </div>
-        <span class = "cart">cart</span>
-    </div>
+
+        <div class="icons-right">
+            <span class="cart">cart</span>
+        </div>
+
     </div>
 </header>
 
-<div class="menu-icon-overlay">&#9776;</div>
-
+<div class="sidebar-overlay"></div>
 <div class="sidebar">
-    <ul>
-        <li><a href = "/index.html">HOME</a></li>
-        <li><a href = "/index.html">MEN</a></li>
-        <li><a href = "/index.html">WOMEN</a></li>
-        <li><a href = "/index.html">ACCESSORIES</a></li>
-    </ul>
+    <div class="exit">X CLOSE</div>
+    <div class="sb-items">
+
+    </div>
+    <div class="sb-info">
+        <div class="subtotal">
+            <p>SUBTOTAL</p>
+            <p>price goes here</p>
+            <p class="sub-description">Domestic shipping. Tariffs and import duties included. Sales tax will be
+                calculated at checkout.</p>
+        </div>
+        <div class="sb-checkout">
+            <a href="../html-pages/checkout.html"><button type="button">CHECKOUT</button></a>
+        </div>
+    </div>
 </div>
