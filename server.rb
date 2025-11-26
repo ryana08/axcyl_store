@@ -1,50 +1,37 @@
 require 'stripe'
 require 'sinatra'
+require 'sinatra/cors'
 require 'dotenv/load'
 
-# This is your test secret API key.
 Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
+set :allow_origin, '*'
+set :allow_methods, 'GET,POST,OPTIONS'
+set :allow_headers, 'content-type'
 set :static, true
 set :port, 4242
 
 YOUR_DOMAIN = 'http://localhost:5500'
 
-# Enable CORS for frontend requests
-before do
-  headers['Access-Control-Allow-Origin'] = '*'
-  headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-  headers['Access-Control-Allow-Headers'] = 'Content-Type'
-end
-
-options '*' do
-  response.headers['Access-Control-Allow-Origin'] = '*'
-  response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-  response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-  200
-end
-
 post '/create-checkout-session' do
   content_type 'application/json'
   
-  # Parse the cart data from request body
   request_body = JSON.parse(request.body.read)
   cart_items = request_body['items']
   
-  # Convert cart items to Stripe line_items format
   line_items = cart_items.map do |item|
     {
       price_data: {
         currency: 'usd',
         product_data: {
           name: item['name'],
-          images: [item['image']], # Optional: include product image
+          images: [item['image']],
           metadata: {
             size: item['size'],
             color: item['color']
           }
         },
-        unit_amount: (item['price'] * 100).to_i, # Convert dollars to cents
+        unit_amount: (item['price'] * 100).to_i,
       },
       quantity: item['quantity'],
     }
@@ -68,5 +55,3 @@ get '/session-status' do
     customer_email: session.customer_details.email
   }.to_json
 end
-
-puts "Server running on http://localhost:4242"
