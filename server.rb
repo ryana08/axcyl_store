@@ -62,24 +62,35 @@ post '/create-checkout-session' do
 
   begin
     domain_url = ENV['PUBLIC_URL']
+    halt 400, { error: "PUBLIC_URL environment variable not set" }.to_json if domain_url.nil? || domain_url.strip.empty?
 
-    if domain_url.nil? || domain_url.strip.empty?
-      halt 400, { error: "PUBLIC_URL environment variable not set" }.to_json
+    request_body = JSON.parse(request.body.read)
+    cart_items = request_body['items'] || []
+
+    line_items = cart_items.map do |item|
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item['name'],
+            images: [item['image']],
+            metadata: {
+              size: item['size'],
+              color: item['color']
+            }
+          },
+          unit_amount: (item['price'] * 100).to_i
+        },
+        quantity: item['quantity']
+      }
     end
 
     session = Stripe::Checkout::Session.create(
-      success_url: "#{domain_url}/success.html?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "#{domain_url}/cancel.html",
+      success_url: "#{domain_url}/html-pages/checkout.html?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "#{domain_url}/html-pages/cart.html",
       mode: 'payment',
       payment_method_types: ['card'],
-      line_items: [{
-        price_data: {
-          currency: 'usd',
-          product_data: { name: 'Claw Machine Credit' },
-          unit_amount: 100
-        },
-        quantity: 1
-      }]
+      line_items: line_items
     )
 
     { id: session.id }.to_json
