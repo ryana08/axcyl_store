@@ -1,17 +1,33 @@
 require 'stripe'
 require 'sinatra'
-require 'sinatra/cors'
 require 'dotenv/load'
 
 Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
-set :allow_origin, '*'
-set :allow_methods, 'GET,POST,OPTIONS'
-set :allow_headers, 'content-type'
 set :static, true
 set :port, 4242
+set :bind, '0.0.0.0'
 
 YOUR_DOMAIN = 'http://localhost:5500'
+
+# CORS configuration - must be before routes
+configure do
+  enable :cross_origin
+end
+
+before do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+  response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token'
+  response.headers['Access-Control-Max-Age'] = '1728000'
+end
+
+options '*' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+  response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token'
+  halt 200
+end
 
 post '/create-checkout-session' do
   content_type 'application/json'
