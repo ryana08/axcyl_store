@@ -28,7 +28,7 @@ async function initializeCheckout() {
   
   // Function to fetch client secret from server
   async function fetchClientSecret() {
-    const response = await fetch('https://yanxander.com/create-checkout-session', {
+    const response = await fetch('https://api.yanxander.com/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ async function initializeCheckout() {
 }
 
 async function showOrderStatus(sessionId) {
-  const response = await fetch(`https://yanxander.com/session-status?session_id=${sessionId}`);
+  const response = await fetch(`https://api.yanxander.com/session-status?session_id=${sessionId}`);
   const session = await response.json();
 
   const checkoutDiv = document.getElementById('checkout');
