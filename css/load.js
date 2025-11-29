@@ -65,29 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-// ----- CREATE NOTIFICATION ELEMENT -----
-function createNotification() {
-  if (!document.getElementById('notification')) {
-    const notification = document.createElement('div');
-    notification.id = 'notification';
-    notification.className = 'notification';
-    document.body.appendChild(notification);
-  }
-}
-
-// ----- NOTIFICATION HELPER -----
-function showNotification(message, type = 'error') {
-  createNotification(); // Ensure notification exists
-  const notification = document.getElementById('notification');
-  notification.textContent = message;
-  notification.className = `notification ${type}`;
-  notification.classList.add('show');
-  
-  setTimeout(() => {
-    notification.classList.remove('show');
-  }, 3000);
-}
-
 // ----- ADD TO CART -----
 const addToCartButton = document.querySelector('.add-to-cart');
 addToCartButton?.addEventListener('click', () => {
@@ -95,7 +72,7 @@ addToCartButton?.addEventListener('click', () => {
   const selectedColor = document.querySelector('.color button.selected');
 
   if (!selectedSize || !selectedColor) {
-    showNotification('Please select a size and color before adding to cart!', 'error');
+    alert('Please select a size and color before adding to cart!');
     return;
   }
 
@@ -117,8 +94,6 @@ addToCartButton?.addEventListener('click', () => {
   cart.push(cartItem);
   localStorage.setItem('cart', JSON.stringify(cart));
 
-  showNotification(`${prodName} added to cart!`, 'success');
-  
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.querySelector('.sidebar-overlay');
   
