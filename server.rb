@@ -61,7 +61,7 @@ class CheckoutServer < Sinatra::Base
         ui_mode: 'embedded',
         line_items: line_items,
         mode: 'payment',
-        return_url: 'https://web-production-6c5dc.up.railway.app/html-pages/checkout.html?session_id={CHECKOUT_SESSION_ID}'
+        return_url: 'https://yanxander.com/html-pages/checkout.html?session_id={CHECKOUT_SESSION_ID}'
       )
 
       { clientSecret: session.client_secret }.to_json
