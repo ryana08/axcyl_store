@@ -106,6 +106,7 @@ addToCartButton?.addEventListener('click', () => {
     }
   }
 });
+});
 
 /* RENDER CART INFO */
 
